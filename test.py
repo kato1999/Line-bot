@@ -85,7 +85,7 @@ def call_restsearch(latitude, longitude):
         # "range": search_range
     }
     # params = urllib3.parse.urlencode(query, safe=",")
-    response = urllib3.request.urlopen(RESTSEARCH_URL + "?" + query).read()
+    response = requests.get(RESTSEARCH_URL).read()
     result = json.loads(response)
 
     if "error" in result:
