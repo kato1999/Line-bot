@@ -62,7 +62,7 @@ def handle_message(event):
     text = event.message.text
 
     if 'カフェ' in text:
-
+        pass
     elif '天気' in text:
         line_bot_api.reply_message(
             event.reply_token,
