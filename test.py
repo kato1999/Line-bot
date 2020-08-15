@@ -94,7 +94,6 @@ def callback():
     # return 'OK'
 
 
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.reply_token == "00000000000000000000000000000000":
@@ -138,7 +137,9 @@ def handle_message(event):
                 # TODO: rangeをユーザーアクションによって選択可能にしたい
                 # "range": search_range
             }
-            # params = urllib3.parse.urlencode(query, safe=",")
+            params = urllib.parse.urlencode(query, safe=",")
+            response = urllib.request.urlopen(RESTSEARCH_URL + "?" + params).read()
+            result = json.loads(response)
 
             if "error" in result:
                 if "message" in result:
