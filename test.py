@@ -71,6 +71,7 @@ def handle_message(event):
     text = event.message.text
 
     if 'カフェ' in text:
+
         line_bot_api.reply_message(
             event.reply_token,
             [
@@ -78,10 +79,12 @@ def handle_message(event):
             TextSendMessage(text='line://nv/location')
             ]
         )
-        # @handler.add(MessageEvent, message=LocationMessage)
+
+        #@handler.add(MessageEvent, message=LocationMessage)
         # def passer():
         #     pass
 
+        @handler.add(MessageEvent, message=LocationMessage)
         def handle_location(event):
             lat = event.message.latitude
             lon = event.message.longitude
