@@ -21,13 +21,13 @@ def rest_search(lat,lon):
     URL = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
     api_params = {
                 "keyid":"GNAVI_API_KEY",
-                "category_s":"RSFST09004",
+                # "category_s":"RSFST09004",
                 "latitude":lat,
                 "longitude":lon,
                 "range":3,
                 "hit_per_page":5
                 }
 
-    rest = requests.get(URL,params = api_params).json()["rest"]
+    rest = requests.get(URL, params = api_params).json()["rest"]
     json_datas = [data for data in rest]
     return json_datas
