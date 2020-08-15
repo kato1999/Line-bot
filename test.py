@@ -232,7 +232,7 @@ def handle_location_message(event):
             result_text = result_text[:56] + "..."
 
         result_dict = {
-            "thumbnail_image_url": image1,
+            "thumbnail_image_url": "https://1.bp.blogspot.com/--R3PJRI_b-w/XvcI5TatI2I/AAAAAAABZt4/LPy_kF8BYtgYy7R76I2C2N_hVWW6Bw2dwCNcBGAsYHQ/s1600/osyougatsu_text_2021.png",
             "title": name,
             # "text": pr_short + "\n" + opentime + "\n" + holiday + "\n"
             # + access_walk + "\n",
