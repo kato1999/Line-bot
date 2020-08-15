@@ -34,7 +34,6 @@ YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-
 GNAVI_API_KEY = os.getenv('GNAVI_API_KEY')
 BOT_SERVER_URL = os.getenv('BOT_SERVER_URL')
 os.environ['http_proxy'] = os.getenv('FIXIE_URL')
@@ -200,6 +199,7 @@ def handle_message(event):
                 event.reply_token,
                 TextSendMessage(text=result)
             )
+
 
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location_message(event):
