@@ -41,9 +41,16 @@ def handle_message(event):
     if event.reply_token == "00000000000000000000000000000000":
         return
         
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    text = event.message.text
+    if '位置情報' in text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            [
+            TextSendMessage(text='位置情報を教えてください。'),
+            TextSendMessage(text='line://nv/location')
+            ]
+        )
+    
 
 
 if __name__ == "__main__":
