@@ -20,7 +20,7 @@ def create_carousel(rest_colum):
 def rest_search(lat,lon):
     URL = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
     api_params = {
-                "keyid":"ACCESS_KEY",
+                "keyid":"GNAVI_API_KEY",
                 "category_s":"RSFST09004",
                 "latitude":lat,
                 "longitude":lon,
