@@ -1,2 +1,2 @@
+line_bot_sdk==1.16.0
 Flask==1.1.1
-line-bot-sdk==1.14.0
