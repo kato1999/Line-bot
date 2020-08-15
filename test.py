@@ -74,18 +74,15 @@ FOLLOWED_RESPONSE = "フォローありがとうございます。位置情報�
 
 
 def call_restsearch(latitude, longitude):
-    query = {
-        "keyid": GNAVI_API_KEY,
-        "latitude": latitude,
-        "longitude": longitude,
-        # TODO: category_sを動的に生成
-        "category_s": "RSFST18008,RSFST18009,RSFST18010,RSFST18011,RSFST18012"
-        # TODO: hit_per_pageや offsetの変更に対応 (e.g., 指定可能にする, 多すぎるときは普通にブラウザに飛ばす, など)
-        # TODO: rangeをユーザーアクションによって選択可能にしたい
-        # "range": search_range
-    }
+    
+    URL = "keyid=GNAVI_API_KEY&latitude=lt&longitude=lng&category_s=RSFST18008"
+    URL = URL.replace("GNAVI_API_KEY",GNAVI_API_KEY)
+    URL = URL.replace("lt",latitude)
+    URL = URL.replace("lng",longitude)
+
     # params = urllib3.parse.urlencode(query, safe=",")
-    response = requests.get(RESTSEARCH_URL).read()
+    print(RESTSEARCH_URL+URL)
+    response = requests.get(RESTSEARCH_URL+URL)
     result = json.loads(response)
 
     if "error" in result:
