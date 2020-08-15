@@ -85,7 +85,7 @@ def call_restsearch(latitude, longitude):
         # "range": search_range
     }
     # params = urllib3.parse.urlencode(query, safe=",")
-    response = requests.get(RESTSEARCH_URL).read()
+    response = urllib3.request.urlopen(RESTSEARCH_URL + "?" + query["category_s"]).read()
     result = json.loads(response)
 
     if "error" in result:
@@ -290,6 +290,5 @@ if __name__ == "__main__":
 #    app.run()
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
-
 
 
