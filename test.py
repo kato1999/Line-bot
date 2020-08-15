@@ -17,6 +17,12 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
+<<<<<<< HEAD
+=======
+import json
+import sys
+
+>>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
 app = Flask(__name__)
 
 #環境変数取得
@@ -40,13 +46,17 @@ def callback():
 
     return 'OK'
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.reply_token == "00000000000000000000000000000000":
         return
         
     text = event.message.text
+
     if 'カフェ' in text:
         line_bot_api.reply_message(
             event.reply_token,
@@ -55,6 +65,9 @@ def handle_message(event):
             TextSendMessage(text='line://nv/location')
             ]
         )
+
+        
+    #-------------------天気-------------------
     elif '天気' in text:
         line_bot_api.reply_message(
             event.reply_token,
@@ -94,9 +107,10 @@ def handle_message(event):
           
             result = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(8)]
             result = ('{}\nの今日の天気は\n'.format(original_location) + '\n'.join(result) + '\nです。')
-          
+    
             return result
         
+<<<<<<< HEAD
         @handler.add(MessageEvent, message=LocationMessage)
         def handle_location(event):
             if event.reply_token == "00000000000000000000000000000000":
@@ -108,8 +122,27 @@ def handle_message(event):
                 event.reply_token,
                 TextSendMessage(text=result)
             )
+=======
+            @handler.add(MessageEvent, message=LocationMessage)
+            def handle_location(event):
+                if event.reply_token == "00000000000000000000000000000000":
+                    return
+                text = event.message.address
+            
+                result = get_weather_from_location(text)
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text=result)
+                )
+>>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
 
 if __name__ == "__main__":
 #    app.run()
     port = int(os.getenv("PORT", 5000))
+<<<<<<< HEAD
     app.run(host="0.0.0.0", port=port, debug=True)
+=======
+    app.run(host="0.0.0.0", port=port, debug=True)
+
+
+>>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
