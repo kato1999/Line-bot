@@ -36,8 +36,8 @@ handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 GNAVI_API_KEY = os.getenv('GNAVI_API_KEY')
 BOT_SERVER_URL = os.getenv('BOT_SERVER_URL')
-os.environ['http_proxy'] = os.getenv('FIXIE_URL')
-os.environ['https_proxy'] = os.getenv('FIXIE_URL')
+# os.environ['http_proxy'] = os.getenv('FIXIE_URL')
+# os.environ['https_proxy'] = os.getenv('FIXIE_URL')
 
 if GNAVI_API_KEY is None:
     print('Specify GNAVI_API_KEY as environment variable.')
