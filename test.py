@@ -62,7 +62,13 @@ def handle_message(event):
     text = event.message.text
 
     if 'カフェ' in text:
-        pass
+        line_bot_api.reply_message(
+            event.reply_token,
+            [
+            TextSendMessage(text='位置情報を教えてください。'),
+            TextSendMessage(text='line://nv/location')
+            ]
+        )
     elif '天気' in text:
         line_bot_api.reply_message(
             event.reply_token,
