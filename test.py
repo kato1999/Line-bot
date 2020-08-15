@@ -91,6 +91,8 @@ def get_weather_from_location(original_location):
     return result
 @handler.add(MessageEvent, message=LocationMessage)
 def handle_location(event):
+    if event.reply_token == "00000000000000000000000000000000":
+        return
     text = event.message.address
 
     result = get_weather_from_location(text)
