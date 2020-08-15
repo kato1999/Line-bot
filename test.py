@@ -146,92 +146,6 @@ def handle_message(event):
             TextSendMessage(text='line://nv/location')
             ]
         )
-
-        @handler.add(MessageEvent, message=LocationMessage)
-        def handle_location(event):
-            if event.reply_token == "00000000000000000000000000000000":
-                return
-
-            user_lat = event.message.latitude
-            user_longit = event.message.longitude
-
-            cafe_search_result = call_restsearch(user_lat, user_longit)
-            print("cafe_search_result is: {}".format(cafe_search_result))
-
-            response_json_list = []
-
-            # process result
-            for (count, rest) in enumerate(cafe_search_result.get("rest")):
-                # TODO: holiday, opentimeで表示を絞りたい
-                access = rest.get("access", {})
-                access_walk = "徒歩 {}分".format(access.get("walk", ""))
-                holiday = "定休日: {}".format(rest.get("holiday", ""))
-                image_url = rest.get("image_url", {})
-                # image1 = image_url.get("shop_image1", "thumbnail_template.jpg")
-                # if image1 == "":
-                #     image1 = BOT_SERVER_URL + "/static/thumbnail_template.jpg"
-                name = rest.get("name", "")
-                opentime = "営業時間: {}".format(rest.get("opentime", ""))
-                # pr = rest.get("pr", "")
-                # pr_short = pr.get("pr_short", "")
-                url = rest.get("url", "")
-
-                result_text = opentime + "\n" + holiday + "\n" + access_walk + "\n"
-                if len(result_text) > 60:
-                    result_text = result_text[:56] + "..."
-
-                result_dict = {
-                    "thumbnail_image_url": "https://1.bp.blogspot.com/--R3PJRI_b-w/XvcI5TatI2I/AAAAAAABZt4/LPy_kF8BYtgYy7R76I2C2N_hVWW6Bw2dwCNcBGAsYHQ/s1600/osyougatsu_text_2021.png",
-                    "title": name,
-                    # "text": pr_short + "\n" + opentime + "\n" + holiday + "\n"
-                    # + access_walk + "\n",
-                    "text": result_text,
-                    "actions": {
-                        "label": "ぐるなびで見る",
-                        "uri": url
-                    }
-                }
-                response_json_list.append(result_dict)
-            print("response_json_list is: {}".format(response_json_list))
-            columns = [
-                CarouselColumn(
-                    thumbnail_image_url=column["thumbnail_image_url"],
-                    title=column["title"],
-                    text=column["text"],
-                    actions=[
-                        URITemplateAction(
-                            label=column["actions"]["label"],
-                            uri=column["actions"]["uri"],
-                        )
-                    ]
-                )
-                for column in response_json_list
-            ]
-            # TODO: GoogleMapへのリンク実装
-
-            messages = TemplateSendMessage(
-                alt_text="喫茶店の情報をお伝えしました",
-                template=CarouselTemplate(columns=columns),
-            )
-            print("messages is: {}".format(messages))
-
-            line_bot_api.reply_message(
-                event.reply_token,
-                messages=messages
-            )
-
-        @handler.add(FollowEvent)
-        def handle_follow(event):
-            line_bot_api.reply_message(
-                event.reply_token, TextSendMessage(text=FOLLOWED_RESPONSE)
-            )
-
-
-        @handler.add(UnfollowEvent)
-        def handle_unfollow():
-            app.logger.info("Got Unfollow event")
-
-
     elif '天気' in text:
         line_bot_api.reply_message(
             event.reply_token,
@@ -286,6 +200,90 @@ def handle_message(event):
         #         TextSendMessage(text=result)
         #     )
 
+
+@handler.add(MessageEvent, message=LocationMessage)
+def handle_location(event):
+    if event.reply_token == "00000000000000000000000000000000":
+        return
+
+    user_lat = event.message.latitude
+    user_longit = event.message.longitude
+
+    cafe_search_result = call_restsearch(user_lat, user_longit)
+    print("cafe_search_result is: {}".format(cafe_search_result))
+
+    response_json_list = []
+
+    # process result
+    for (count, rest) in enumerate(cafe_search_result.get("rest")):
+        # TODO: holiday, opentimeで表示を絞りたい
+        access = rest.get("access", {})
+        access_walk = "徒歩 {}分".format(access.get("walk", ""))
+        holiday = "定休日: {}".format(rest.get("holiday", ""))
+        image_url = rest.get("image_url", {})
+        # image1 = image_url.get("shop_image1", "thumbnail_template.jpg")
+        # if image1 == "":
+        #     image1 = BOT_SERVER_URL + "/static/thumbnail_template.jpg"
+        name = rest.get("name", "")
+        opentime = "営業時間: {}".format(rest.get("opentime", ""))
+        # pr = rest.get("pr", "")
+        # pr_short = pr.get("pr_short", "")
+        url = rest.get("url", "")
+
+        result_text = opentime + "\n" + holiday + "\n" + access_walk + "\n"
+        if len(result_text) > 60:
+            result_text = result_text[:56] + "..."
+
+        result_dict = {
+            "thumbnail_image_url": "https://1.bp.blogspot.com/--R3PJRI_b-w/XvcI5TatI2I/AAAAAAABZt4/LPy_kF8BYtgYy7R76I2C2N_hVWW6Bw2dwCNcBGAsYHQ/s1600/osyougatsu_text_2021.png",
+            "title": name,
+            # "text": pr_short + "\n" + opentime + "\n" + holiday + "\n"
+            # + access_walk + "\n",
+            "text": result_text,
+            "actions": {
+                "label": "ぐるなびで見る",
+                "uri": url
+            }
+        }
+        response_json_list.append(result_dict)
+    print("response_json_list is: {}".format(response_json_list))
+    columns = [
+        CarouselColumn(
+            thumbnail_image_url=column["thumbnail_image_url"],
+            title=column["title"],
+            text=column["text"],
+            actions=[
+                URITemplateAction(
+                    label=column["actions"]["label"],
+                    uri=column["actions"]["uri"],
+                )
+            ]
+        )
+        for column in response_json_list
+    ]
+    # TODO: GoogleMapへのリンク実装
+
+    messages = TemplateSendMessage(
+        alt_text="喫茶店の情報をお伝えしました",
+        template=CarouselTemplate(columns=columns),
+    )
+    print("messages is: {}".format(messages))
+
+    line_bot_api.reply_message(
+        event.reply_token,
+        messages=messages
+    )
+
+@handler.add(FollowEvent)
+def handle_follow(event):
+    line_bot_api.reply_message(
+        event.reply_token, TextSendMessage(text=FOLLOWED_RESPONSE)
+    )
+
+
+@handler.add(UnfollowEvent)
+def handle_unfollow():
+    app.logger.info("Got Unfollow event")
 
 
 if __name__ == "__main__":
