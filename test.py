@@ -8,9 +8,11 @@ from linebot.exceptions import(
     InvalidSignatureError
 )
 from linebot.models import(
-    MessageEvent, TextMessage, TextSendMessage
+    MessageEvent, TextMessage, TextSendMessage, LocationMessage
 )
 import os
+
+from linebot.exceptions import LineBotApiError
 
 import requests
 from bs4 import BeautifulSoup
