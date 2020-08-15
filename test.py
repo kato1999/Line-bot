@@ -21,6 +21,8 @@ import re
 =======
 import json
 import sys
+import urllib3.request
+# import urllib3.parse
 
 >>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
 app = Flask(__name__)
@@ -31,6 +33,7 @@ YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -47,9 +50,13 @@ def callback():
     return 'OK'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
+=======
+
+>>>>>>> be32bf0997b3f78ef3972ea3c94710d23558840a
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.reply_token == "00000000000000000000000000000000":
@@ -65,9 +72,10 @@ def handle_message(event):
             TextSendMessage(text='line://nv/location')
             ]
         )
+        @handler.add(MessageEvent, message=LocationMessage)
+        def passer():
+            pass
 
-        
-    #-------------------天気-------------------
     elif '天気' in text:
         line_bot_api.reply_message(
             event.reply_token,
@@ -107,21 +115,29 @@ def handle_message(event):
           
             result = [('{0[0]}: {0[1]}, {0[2]}°C'.format(weather_info[i])) for i in range(8)]
             result = ('{}\nの今日の天気は\n'.format(original_location) + '\n'.join(result) + '\nです。')
-    
+          
             return result
         
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> be32bf0997b3f78ef3972ea3c94710d23558840a
         @handler.add(MessageEvent, message=LocationMessage)
         def handle_location(event):
             if event.reply_token == "00000000000000000000000000000000":
                 return
             text = event.message.address
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> be32bf0997b3f78ef3972ea3c94710d23558840a
             result = get_weather_from_location(text)
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=result)
             )
+<<<<<<< HEAD
 =======
             @handler.add(MessageEvent, message=LocationMessage)
             def handle_location(event):
@@ -135,6 +151,9 @@ def handle_message(event):
                     TextSendMessage(text=result)
                 )
 >>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
+=======
+            
+>>>>>>> be32bf0997b3f78ef3972ea3c94710d23558840a
 
 if __name__ == "__main__":
 #    app.run()
