@@ -17,19 +17,27 @@ import requests
 from bs4 import BeautifulSoup
 import re
 
-<<<<<<< HEAD
-=======
+
 import json
 import sys
 import urllib3.request
 # import urllib3.parse
 
->>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
+
+from carousel import create_carousel,rest_search
+
 app = Flask(__name__)
 
 #環境変数取得
 YOUR_CHANNEL_ACCESS_TOKEN = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
 YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
+
+if YOUR_CHANNEL_SECRET is None:
+    print('Specify LINE_CHANNEL_SECRET as environment variable.')
+    sys.exit(1)
+if YOUR_CHANNEL_ACCESS_TOKEN is None:
+    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
+    sys.exit(1)
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
@@ -65,6 +73,7 @@ def handle_message(event):
     text = event.message.text
 
     if 'カフェ' in text:
+
         line_bot_api.reply_message(
             event.reply_token,
             [
@@ -72,9 +81,21 @@ def handle_message(event):
             TextSendMessage(text='line://nv/location')
             ]
         )
+
+        #@handler.add(MessageEvent, message=LocationMessage)
+        # def passer():
+        #     pass
+
         @handler.add(MessageEvent, message=LocationMessage)
-        def passer():
-            pass
+        def handle_location(event):
+            lat = event.message.latitude
+            lon = event.message.longitude
+
+            rest_datas = rest_search(lat,lon)
+
+            template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
+            line_bot_api.reply_message(event.reply_token, template_message)
+
 
     elif '天気' in text:
         line_bot_api.reply_message(
