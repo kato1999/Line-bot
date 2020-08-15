@@ -22,8 +22,8 @@ import re
 
 import json
 import sys
-import urllib.request
-import urllib.parse
+import urllib3.request
+import urllib3.parse
 
 app = Flask(__name__)
 
@@ -84,8 +84,8 @@ def call_restsearch(latitude, longitude):
         # TODO: rangeをユーザーアクションによって選択可能にしたい
         # "range": search_range
     }
-    params = urllib.parse.urlencode(query, safe=",")
-    response = urllib.request.urlopen(RESTSEARCH_URL + "?" + params).read()
+    params = urllib3.parse.urlencode(query, safe=",")
+    response = urllib3.request.urlopen(RESTSEARCH_URL + "?" + params).read()
     result = json.loads(response)
 
     if "error" in result:
