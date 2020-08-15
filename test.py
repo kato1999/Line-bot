@@ -35,7 +35,7 @@ line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 GNAVI_API_KEY = os.getenv('GNAVI_API_KEY')
-BOT_SERVER_URL = os.getenv('BOT_SERVER_URL')
+# BOT_SERVER_URL = os.getenv('BOT_SERVER_URL')
 # os.environ['http_proxy'] = os.getenv('FIXIE_URL')
 # os.environ['https_proxy'] = os.getenv('FIXIE_URL')
 
@@ -48,12 +48,12 @@ if YOUR_CHANNEL_SECRET is None:
 if YOUR_CHANNEL_ACCESS_TOKEN is None:
     print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
     sys.exit(1)
-if BOT_SERVER_URL is None:
-    print('Specify BOT_SERVER_URL as environment variable.')
-    sys.exit(1)
-if os.getenv('FIXIE_URL') is None:
-    print('Specify FIXIE_URL as environment variable.')
-    sys.exit(1)
+# if BOT_SERVER_URL is None:
+#     print('Specify BOT_SERVER_URL as environment variable.')
+#     sys.exit(1)
+# if os.getenv('FIXIE_URL') is None:
+#     print('Specify FIXIE_URL as environment variable.')
+#     sys.exit(1)
 
 # instantiation
 # TODO: インスタンス生成はグローバルでなくファクトリメソッドに移したい
@@ -218,9 +218,9 @@ def handle_location_message(event):
         access_walk = "徒歩 {}分".format(access.get("walk", ""))
         holiday = "定休日: {}".format(rest.get("holiday", ""))
         image_url = rest.get("image_url", {})
-        image1 = image_url.get("shop_image1", "thumbnail_template.jpg")
-        if image1 == "":
-            image1 = BOT_SERVER_URL + "/static/thumbnail_template.jpg"
+        # image1 = image_url.get("shop_image1", "thumbnail_template.jpg")
+        # if image1 == "":
+        #     image1 = BOT_SERVER_URL + "/static/thumbnail_template.jpg"
         name = rest.get("name", "")
         opentime = "営業時間: {}".format(rest.get("opentime", ""))
         # pr = rest.get("pr", "")
