@@ -30,7 +30,7 @@ def rest_search(lat,lon):
     URL = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
     api_params = {
                 "keyid":"45747be45373a6faec585372092743d9",
-                # "category_s":"RSFST09004",
+                "category_s":"RSFST18008,RSFST18009,RSFST18010,RSFST18011,RSFST18012",
                 "latitude":lat,
                 "longitude":lon,
                 "range":5,
