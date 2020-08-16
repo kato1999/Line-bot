@@ -13,7 +13,6 @@ def create_carousel(rest_colum):
                         uri=rest["url_mobile"]
                         )],
                 thumbnailImageUrl=rest["shop_image1"],
-                imageSize=contain
             )
             for rest in rest_colum]
     )
