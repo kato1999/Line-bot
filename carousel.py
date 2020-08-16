@@ -25,7 +25,7 @@ def rest_search(lat,lon):
                 "latitude":lat,
                 "longitude":lon,
                 "range":5,
-                "hit_per_page":100
+                "hit_per_page":10
                 }
 
 
