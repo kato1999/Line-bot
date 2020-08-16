@@ -88,7 +88,7 @@ def handle_message(event):
             lat = event.message.latitude
             lon = event.message.longitude
 
-            rest_datas = rest_search(35.69,139.45)
+            rest_datas = rest_search(lat,lon)
             # template_message = TextSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
             line_bot_api.reply_message(
                 event.reply_token,
