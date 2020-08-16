@@ -22,7 +22,7 @@ import urllib3.request
 # import urllib3.parse
 
 
-from carousel import create_carousel, rest_search, image_carousel
+from carousel import create_carousel, rest_search
 
 app = Flask(__name__)
 
