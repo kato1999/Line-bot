@@ -85,11 +85,11 @@ def handle_message(event):
 
             rest_datas = rest_search(35.69,139.45)
 
-            template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
+            # template_message = TextSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                TemplateSendMessage(text=rest_datas)
+                TextSendMessage(text=rest_datas)
                 ]
                 )
 
