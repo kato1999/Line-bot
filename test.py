@@ -94,7 +94,7 @@ def handle_message(event):
             line_bot_api.reply_message(
                 event.reply_token,
                 [
-                TextSendMessage(text=rest_datas)
+                TextSendMessage(text=str(rest_datas))
                 ]
                 )
 
