@@ -11,8 +11,8 @@ def create_carousel(rest_colum):
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
-                thumbnailImageUrl=rest["image_url"]["shop_image1"],
-                text=rest["image_url"]["shop_image1"],
+                thumbnail_image_url=rest["image_url"]["shop_image1"],
+                text=rest["name"],
                 actions=[
                     URITemplateAction(
                         label="開く",
