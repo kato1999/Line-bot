@@ -104,12 +104,19 @@ def handle_message(event):
                     ])
             """
         
-
-            template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
-            line_bot_api.reply_message(
-                event.reply_token,
-                template_message
-                )
+            if rest_datas:
+                template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    template_message
+                    )
+            else:
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    [
+                    TextSendMessage(text='近くにお店がありません。'),
+                    ]
+                )    
 
 
     elif '天気' in text:
