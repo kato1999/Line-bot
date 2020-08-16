@@ -104,7 +104,7 @@ def handle_message(event):
                     ])
         
 
-            template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=CarouselTemplate(columns=columns))
+            template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=CarouselTemplate(columns=rest))
             line_bot_api.reply_message(
                 event.reply_token,
                 template_message
