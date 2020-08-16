@@ -6,7 +6,8 @@ def create_carousel(rest_colum):
     arr = []
     for rest in rest_colum:
             if rest["image_url"]["shop_image1"]=="":
-                rest["image_url"]["shop_image1"] = "http://illustrain.com/img/work/2016/illustrain01-okashi08.png"
+                if "jpeg" not in rest["image_url"]["shop_image1"] and "png" not in rest["image_url"]["shop_image1"]:
+                    rest["image_url"]["shop_image1"] = "http://illustrain.com/img/work/2016/illustrain01-okashi08.png"
             arr.append(rest)
     carousel_template = CarouselTemplate(
         columns=[
