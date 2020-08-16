@@ -14,13 +14,16 @@ def create_carousel(rest_colum):
             
             if rest["holiday"] == "":
                 rest["holiday"] = "情報なし"
+            
+            if rest["budget"] == "":
+                rest["budget"] = "情報なし"
 
             arr.append(rest)
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
                 thumbnailImageUrl=rest["image_url"]["shop_image1"],
-                text=rest["name"] + "\n【営業時間】" + rest["opentime"] + "\n【休業日】" + rest["holiday"],
+                text=rest["name"] + "\n【営業時間】" + rest["opentime"] + "\n【休業日】" + rest["holiday"] + "\n【平均予算】" + rest["budget"],
                 actions=[
                     URITemplateAction(
                         label="開く",
