@@ -6,9 +6,7 @@ from linebot import (
 from linebot.exceptions import(
     InvalidSignatureError
 )
-from linebot.models import(
-    MessageEvent, TextMessage, TextSendMessage, LocationMessage
-)
+from linebot.models import *
 import os
 
 from linebot.exceptions import LineBotApiError
@@ -48,14 +46,19 @@ def callback():
     signature = request.headers['X-Line-Signature']
 
     body = request.get_data(as_text=True)
-    app.logger.info("Request body: "+body)
+    app.logger.info("Request body: " + body)
 
+    # handle webhook body
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
+    except LineBotApiError as e:
+        app.logger.exception(f'LineBotApiError: {e.status_code} {e.message}', e)
+        raise e
 
     return 'OK'
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -83,14 +86,11 @@ def handle_message(event):
             lat = event.message.latitude
             lon = event.message.longitude
 
-            rest_datas = rest_search(35.69,139.45)
-
-            # template_message = TextSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
+            rest_datas = rest_search(lat, lon)
+            template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
             line_bot_api.reply_message(
                 event.reply_token,
-                [
-                TextSendMessage(text=str(rest_datas))
-                ]
+                template_message
                 )
 
 
