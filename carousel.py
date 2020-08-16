@@ -44,3 +44,22 @@ def rest_search(lat,lon):
     except KeyError:
         return 0
 
+
+def izakaya_search(lat,lon):
+    URL = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
+    api_params = {
+                "keyid":"45747be45373a6faec585372092743d9",
+                "category_l":"RSFST09000",
+                "latitude":lat,
+                "longitude":lon,
+                "range":5,
+                "hit_per_page":10
+                }
+
+    try:
+        rest = requests.get(URL, params = api_params).json()["rest"]
+        json_datas = [data for data in rest]
+        return json_datas
+    except KeyError:
+        return 0
+

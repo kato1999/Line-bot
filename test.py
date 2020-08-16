@@ -21,7 +21,7 @@ import urllib3.request
 
 import scrape as sc
 
-from carousel import create_carousel, rest_search
+from carousel import create_carousel, rest_search, izakaya_search
 
 app = Flask(__name__)
 
@@ -95,7 +95,39 @@ def handle_message(event):
                     [
                     TextSendMessage(text='近くにお店がありません。'),
                     ]
-                )    
+                )  
+
+    elif '居酒屋' in text:
+
+        line_bot_api.reply_message(
+            event.reply_token,
+            [
+            TextSendMessage(text='位置情報を教えてください。'),
+            TextSendMessage(text='line://nv/location')
+            ]
+        )
+
+        @handler.add(MessageEvent, message=LocationMessage)
+        def handle_location(event):
+            lat = event.message.latitude
+            lon = event.message.longitude
+
+            rest_datas = izakaya_search(lat, lon)
+        
+            if rest_datas:
+                template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    template_message
+                    )
+            else:
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    [
+                    TextSendMessage(text='近くにお店がありません。'),
+                    ]
+                )  
+      
 
 
     elif '天気' in text:
@@ -123,7 +155,7 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             [
-            TextSendMessage(text='「カフェ」で近くのカフェ情報がわかります！\n「天気」で天気情報がわかります！')
+            TextSendMessage(text='「カフェ」で近くのカフェ情報がわかります！\n「居酒屋」で近くの居酒屋情報がわかります！\n「天気」で天気情報がわかります！')
             ]
         )
 
