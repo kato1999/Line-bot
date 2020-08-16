@@ -92,7 +92,7 @@ def handle_message(event):
             columns=[
                 CarouselColumn(
                     thumbnail_image_url=rest["image_url"],
-                    title=column["name"],
+                    title=rest["name"],
                     text=rest["name"],
                     actions=[
                         URITemplateAction(
@@ -100,7 +100,7 @@ def handle_message(event):
                             uri=rest["url_mobile"]
                             )]
                         )
-                    for rest in rest_colum
+                    for rest in rest_datas
                     ])
         
 
