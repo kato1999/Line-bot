@@ -3,9 +3,13 @@ from linebot.models import (
 import requests
 
 def create_carousel(rest_colum):
+    for rest in rest_colum:
+            if rest["image_url"]["shop_image1"]=="":
+                rest["image_url"]["shop_image1"] = "https://1.bp.blogspot.com/-fGu-BQLASjY/XVKfyee9h0I/AAAAAAABUEg/6GyUfjrCBaMyiajfLPicoA15N_VaPWAqgCLcBGAs/s1600/drink_coffee_sugar.png"
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
+                thumbnailImageUrl=rest["image_url"]["shop_image1"],
                 text=rest["name"],
                 actions=[
                     URITemplateAction(
@@ -13,16 +17,7 @@ def create_carousel(rest_colum):
                         uri=rest["url_mobile"]
                         )]
             )
-            if rest["image_url"]["shop_image1"] == "" for rest in rest_colum
-            else CarouselColumn(
-                    thumbnailImageUrl=rest["image_url"]["shop_image1"],
-                    text=rest["name"],
-                    actions=[
-                        URITemplateAction(
-                            label="開く",
-                            uri=rest["url_mobile"]
-                            )]
-                  )    
+            for rest in rest_colum
         ]
     )
     return carousel_template
