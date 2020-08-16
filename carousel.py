@@ -23,7 +23,7 @@ def create_carousel(rest_colum):
         columns=[
             CarouselColumn(
                 thumbnailImageUrl=rest["image_url"]["shop_image1"],
-                text=rest["name"] + "\n【営業時間】" + rest["opentime"] + "\n【休業日】" + rest["holiday"] + "\n【平均予算】" + rest["budget"],
+                text=rest["name"] + "\n【営業時間】" + rest["opentime"] + "\n【休業日】" + rest["holiday"] + "\n【平均予算】" + str(rest["budget"]),
                 actions=[
                     URITemplateAction(
                         label="開く",
