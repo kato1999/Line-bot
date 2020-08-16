@@ -28,6 +28,8 @@ def rest_search(lat,lon):
                 "hit_per_page":5
                 }
 
+
     rest = requests.get(URL, params = api_params).json()
     json_datas = [data for data in rest]
     return json_datas
+
