@@ -57,14 +57,6 @@ def callback():
 
     return 'OK'
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
-=======
-
->>>>>>> be32bf0997b3f78ef3972ea3c94710d23558840a
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if event.reply_token == "00000000000000000000000000000000":
@@ -139,27 +131,18 @@ def handle_message(event):
           
             return result
         
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> be32bf0997b3f78ef3972ea3c94710d23558840a
         @handler.add(MessageEvent, message=LocationMessage)
         def handle_location(event):
             if event.reply_token == "00000000000000000000000000000000":
                 return
             text = event.message.address
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> be32bf0997b3f78ef3972ea3c94710d23558840a
             result = get_weather_from_location(text)
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=result)
             )
-<<<<<<< HEAD
-=======
+
             @handler.add(MessageEvent, message=LocationMessage)
             def handle_location(event):
                 if event.reply_token == "00000000000000000000000000000000":
@@ -171,18 +154,10 @@ def handle_message(event):
                     event.reply_token,
                     TextSendMessage(text=result)
                 )
->>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
-=======
-            
->>>>>>> be32bf0997b3f78ef3972ea3c94710d23558840a
+
 
 if __name__ == "__main__":
 #    app.run()
     port = int(os.getenv("PORT", 5000))
-<<<<<<< HEAD
-    app.run(host="0.0.0.0", port=port, debug=True)
-=======
     app.run(host="0.0.0.0", port=port, debug=True)
 
-
->>>>>>> c54a4633c119d400fad484e9544bcf72b1213b54
