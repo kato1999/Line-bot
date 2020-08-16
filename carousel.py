@@ -29,7 +29,7 @@ def rest_search(lat,lon):
                 }
 
 
-    rest = requests.get(URL, params = api_params).json()
+    rest = requests.get(URL, params = api_params).json()["rest"]
     json_datas = [data for data in rest]
     return json_datas
 
