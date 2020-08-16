@@ -11,11 +11,14 @@ def create_carousel(rest_colum):
                     URITemplateAction(
                         label="開く",
                         uri=rest["url_mobile"]
-                        )]
-                    )
-                for rest in rest_colum
-                ])
+                        )],
+                thumbnailImageUrl=rest["shop_image1"],
+                imageSize=contain
+            )
+            for rest in rest_colum]
+    )
     return carousel_template
+
 
 def rest_search(lat,lon):
     URL = "https://api.gnavi.co.jp/RestSearchAPI/v3/"
@@ -32,4 +35,5 @@ def rest_search(lat,lon):
     rest = requests.get(URL, params = api_params).json()["rest"]
     json_datas = [data for data in rest]
     return json_datas
+    
 
