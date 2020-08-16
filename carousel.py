@@ -3,9 +3,11 @@ from linebot.models import (
 import requests
 
 def create_carousel(rest_colum):
+    arr = []
     for rest in rest_colum:
             if rest["image_url"]["shop_image1"]=="":
                 rest["image_url"]["shop_image1"] = "https://1.bp.blogspot.com/-fGu-BQLASjY/XVKfyee9h0I/AAAAAAABUEg/6GyUfjrCBaMyiajfLPicoA15N_VaPWAqgCLcBGAs/s1600/drink_coffee_sugar.png"
+            arr.append(rest)
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
@@ -17,7 +19,7 @@ def create_carousel(rest_colum):
                         uri=rest["url_mobile"]
                         )]
             )
-            for rest in rest_colum
+            for rest in arr
         ]
     )
     return carousel_template
