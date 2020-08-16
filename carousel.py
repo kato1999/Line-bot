@@ -6,15 +6,24 @@ def create_carousel(rest_colum):
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
-                thumbnailImageUrl=rest["image_url"]["shop_image1"],
-                text=rest["image_url"]["shop_image1"] + "a",
+                text=rest["name"],
                 actions=[
                     URITemplateAction(
                         label="開く",
                         uri=rest["url_mobile"]
                         )]
             )
-            for rest in rest_colum]
+            if rest["image_url"]["shop_image1"] == "" for rest in rest_colum
+            else CarouselColumn(
+                    thumbnailImageUrl=rest["image_url"]["shop_image1"],
+                    text=rest["name"],
+                    actions=[
+                        URITemplateAction(
+                            label="開く",
+                            uri=rest["url_mobile"]
+                            )]
+                  )    
+        ]
     )
     return carousel_template
 
