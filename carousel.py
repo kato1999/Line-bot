@@ -24,7 +24,7 @@ def rest_search(lat,lon):
                 # "category_s":"RSFST09004",
                 "latitude":lat,
                 "longitude":lon,
-                "range":5,
+                "range":2,
                 "hit_per_page":5
                 }
 
