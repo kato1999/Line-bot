@@ -11,7 +11,7 @@ def create_carousel(rest_colum):
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
-                thumbnail_image_url=rest["image_url"]["shop_image1"],
+                thumbnailImageUrl=rest["image_url"]["shop_image1"],
                 text=rest["name"],
                 actions=[
                     URITemplateAction(
