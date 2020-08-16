@@ -7,7 +7,7 @@ def create_carousel(rest_colum):
         columns=[
             CarouselColumn(
                 thumbnailImageUrl=rest["image_url"]["shop_image1"],
-                text=rest["name"],
+                text=rest["image_url"]["shop_image1"],
                 actions=[
                     URITemplateAction(
                         label="開く",
