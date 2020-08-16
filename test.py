@@ -19,8 +19,8 @@ import re
 import json
 import sys
 import urllib3.request
-# import urllib3.parse
 
+import scrape as sc
 
 from carousel import create_carousel, rest_search
 
@@ -77,32 +77,12 @@ def handle_message(event):
             ]
         )
 
-        #@handler.add(MessageEvent, message=LocationMessage)
-        # def passer():
-        #     pass
-
         @handler.add(MessageEvent, message=LocationMessage)
         def handle_location(event):
             lat = event.message.latitude
             lon = event.message.longitude
 
             rest_datas = rest_search(lat, lon)
-            """
-            carousel_template = CarouselTemplate(
-            columns=[
-                CarouselColumn(
-                    thumbnail_image_url=rest["image_url"],
-                    title=rest["name"],
-                    text=rest["name"],
-                    actions=[
-                        URITemplateAction(
-                            label="開く",
-                            uri=rest["url_mobile"]
-                            )]
-                        )
-                    for rest in rest_datas
-                    ])
-            """
         
             if rest_datas:
                 template_message = TemplateSendMessage(alt_text='周辺のカフェだよ!', template=create_carousel(rest_datas))
@@ -179,7 +159,7 @@ def handle_message(event):
                     return
                 text = event.message.address
             
-                result = get_weather_from_location(text)
+                result = sc.get_weather_from_location(text)
                 line_bot_api.reply_message(
                     event.reply_token,
                     TextSendMessage(text=result)
