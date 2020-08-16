@@ -6,6 +6,7 @@ def create_carousel(rest_colum):
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
+                thumbnail_image_url=rest["image_url"],
                 text=rest["name"],
                 actions=[
                     URITemplateAction(
