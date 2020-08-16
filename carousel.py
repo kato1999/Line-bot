@@ -6,7 +6,7 @@ def create_carousel(rest_colum):
     arr = []
     for rest in rest_colum:
             if rest["image_url"]["shop_image1"]=="":
-                rest["image_url"]["shop_image1"] = "https://1.bp.blogspot.com/-fGu-BQLASjY/XVKfyee9h0I/AAAAAAABUEg/6GyUfjrCBaMyiajfLPicoA15N_VaPWAqgCLcBGAs/s1600/drink_coffee_sugar.png"
+                rest["image_url"]["shop_image1"] = "http://illustrain.com/img/work/2016/illustrain01-okashi08.png"
             arr.append(rest)
     carousel_template = CarouselTemplate(
         columns=[
