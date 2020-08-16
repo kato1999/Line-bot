@@ -8,12 +8,16 @@ def create_carousel(rest_colum):
             if rest["image_url"]["shop_image1"]=="":
                 if "jpeg" not in rest["image_url"]["shop_image1"] and "png" not in rest["image_url"]["shop_image1"]:
                     rest["image_url"]["shop_image1"] = "http://illustrain.com/img/work/2016/illustrain01-okashi08.png"
+            
+            if rest["opentime"] == "":
+                rest["opentime"] = "情報なし"
+
             arr.append(rest)
     carousel_template = CarouselTemplate(
         columns=[
             CarouselColumn(
                 thumbnailImageUrl=rest["image_url"]["shop_image1"],
-                text=rest["name"] + "\n【営業時間】" + rest["opentime"],
+                text=rest["name"] + "\n【営業時間】" + rest["opentime"] + "\n" + rest[""],
                 actions=[
                     URITemplateAction(
                         label="開く",
