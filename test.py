@@ -106,30 +106,18 @@ def handle_message(event):
             TextSendMessage(text='line://nv/location')
             ]
         )
-        
+
         @handler.add(MessageEvent, message=LocationMessage)
         def handle_location(event):
             if event.reply_token == "00000000000000000000000000000000":
                 return
             text = event.message.address
-
-            result = get_weather_from_location(text)
+        
+            result = sc.get_weather_from_location(text)
             line_bot_api.reply_message(
                 event.reply_token,
                 TextSendMessage(text=result)
             )
-
-            @handler.add(MessageEvent, message=LocationMessage)
-            def handle_location(event):
-                if event.reply_token == "00000000000000000000000000000000":
-                    return
-                text = event.message.address
-            
-                result = sc.get_weather_from_location(text)
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=result)
-                )
     
     else:
         line_bot_api.reply_message(
