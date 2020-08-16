@@ -12,7 +12,7 @@ def create_carousel(rest_colum):
                         label="開く",
                         uri=rest["url_mobile"]
                         )],
-                thumbnailImageUrl=rest["iamge_url"]["shop_image1"],
+                thumbnailImageUrl=rest["image_url"]["shop_image1"],
             )
             for rest in rest_colum]
     )
