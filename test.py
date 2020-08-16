@@ -87,7 +87,24 @@ def handle_message(event):
             lon = event.message.longitude
 
             rest_datas = rest_search(lat, lon)
-            template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=create_carousel(rest_datas))
+
+            carousel_template = CarouselTemplate(
+            columns=[
+                CarouselColumn(
+                    thumbnail_image_url=rest["image_url"],
+                    title=column["name"],
+                    text=rest["name"],
+                    actions=[
+                        URITemplateAction(
+                            label="開く",
+                            uri=rest["url_mobile"]
+                            )]
+                        )
+                    for rest in rest_colum
+                    ])
+        
+
+            template_message = TemplateSendMessage(alt_text='周辺の居酒屋だよ!', template=CarouselTemplate(columns=columns))
             line_bot_api.reply_message(
                 event.reply_token,
                 template_message
