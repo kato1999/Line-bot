@@ -82,7 +82,7 @@ def handle_message(event):
         #     pass
 
         @handler.add(MessageEvent, message=LocationMessage)
-        def handle_location_message(event):
+        def handle_location(event):
             lat = event.message.latitude
             lon = event.message.longitude
 
